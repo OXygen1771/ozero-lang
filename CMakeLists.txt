@@ -16,6 +16,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/target")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/target")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/target")
 
+### OPTIONS ###
+
+# Logging/assertions
+# NOTE: ERROR and FATAL-level messages are enabled in Release builds by default.
+option(OZERO_FORCE_ENABLE_LOGGING "Force enable all logging levels and all assertions, even in Release builds" OFF)
+option(OZERO_FORCE_DISABLE_LOGGING "Force disable all logging levels, even ERROR and FATAL. This also disables all assertions" OFF)
+
+option(OZERO_FORCE_DISABLE_ASSERTIONS "Disable all assertions. Some assertions are enabled in Release builds by default" OFF)
+
 configure_file(
     "${CMAKE_SOURCE_DIR}/include/ozerolang/config.h.in"
     "${CMAKE_BINARY_DIR}/include/ozerolang/config.h"
