@@ -1,6 +1,6 @@
 #pragma once
 
-#include "io/terminal.h"
+#include "terminal/terminal.h"
 
 #include <stdio.h>
 

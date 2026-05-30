@@ -1,4 +1,5 @@
 #include "terminal.h"
+
 #include "string/oz_strings.h"
 
 #include <stdio.h>

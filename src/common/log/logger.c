@@ -1,6 +1,7 @@
 #include "logger.h"
-#include "io/color.h"
-#include "io/color_shorthands.h"
+
+#include "styler/color.h"
+#include "styler/color_shorthands.h"
 
 #include <stdarg.h>
 #include <stdio.h>

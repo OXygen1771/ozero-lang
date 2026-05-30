@@ -1,6 +1,7 @@
 #pragma once
 
 #include "defines.h"
+
 #include "ozerolang/config.h"
 
 typedef enum OzeroLogLevel {

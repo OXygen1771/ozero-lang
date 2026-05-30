@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "io/logger.h"
-#include "io/terminal.h"
-#include "oz_assertions.h"
+#include "log/logger.h"
+#include "log/oz_assertions.h"
+#include "terminal/terminal.h"
 
 int main() {
     oz_term_init();

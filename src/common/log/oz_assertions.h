@@ -1,6 +1,6 @@
 #pragma once
 
-#include "io/logger.h" // IWYU pragma: keep
+#include "logger.h" // IWYU pragma: keep
 
 #include "ozerolang/config.h"
 
