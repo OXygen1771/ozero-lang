@@ -40,7 +40,7 @@ static const char *const oz__style_ansi[] = {
     [OZ_STYLE_ITALIC] = "\033[3m",         [OZ_STYLE_INVERTED] = "\033[7m",
 
     [OZ_STYLE_RED] = "\033[31m",           [OZ_STYLE_GREEN] = "\033[32m",
-    [OZ_STYLE_YELLOW] = "\033[33m",        [OZ_STYLE_BLUE] = "\033[33m",
+    [OZ_STYLE_YELLOW] = "\033[33m",        [OZ_STYLE_BLUE] = "\033[34m",
     [OZ_STYLE_PURPLE] = "\033[35m",        [OZ_STYLE_CYAN] = "\033[36m",
     [OZ_STYLE_WHITE] = "\033[37m",
 
