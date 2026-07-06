@@ -1,9 +1,12 @@
 Checks: '-*,
 bugprone-*,
+cert-*,
+clang-analyzer-*,
 *-c,
 misc-*,
 modernize-*,
 performance-*,
+portability-*,
 readability-*'
 CheckOptions:
   - key: bugprone-argument-comment.StrictMode
