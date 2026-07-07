@@ -39,6 +39,9 @@ The project is inspired by and created while reading the amazing Robert Nystrom'
 
 I do not claim that this is a completely original language, but I strive to do things on my own with but guidance from the book. After all, this is just a learning project.
 
+**Third-party libraries used**:
+- [`minunit.h`](https://github.com/siu/minunit) by David Siñuela Pastor - for testing
+
 ## License
 
 This project is licensed under the [MIT](./LICENSE) (Expat) license.
