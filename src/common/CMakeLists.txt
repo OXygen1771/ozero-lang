@@ -12,7 +12,8 @@ set(COMMON_LOG_SOURCES
     log/logger.c
 )
 set(COMMON_STRING_SOURCES
-    string/oz_strings.c
+    string/oz_string.c
+    string/oz_utf8.c
 )
 set(COMMON_STYLER_SOURCES)
 set(COMMON_TERMINAL_SOURCES

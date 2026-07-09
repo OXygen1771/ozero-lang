@@ -16,3 +16,5 @@ macro(ozero_add_unit_test test_filename)
 endmacro()
 
 ozero_add_unit_test(terminal)
+ozero_add_unit_test(string)
+ozero_add_unit_test(string_utf8)

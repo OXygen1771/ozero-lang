@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stddef.h> // size_t et al.
 #include <stdint.h>
 
 // Number typedefs

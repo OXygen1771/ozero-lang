@@ -1,6 +1,6 @@
 #include "terminal.h"
 
-#include "string/oz_strings.h"
+#include "string/oz_string.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,8 +31,9 @@ void oz_term_init(void) {
         return;
     }
 
-    const char *term = getenv("TERM");
-    if (term != nullptr && oz_strings_equal(term, "dumb")) {
+    OzeroStringSlice term = oz_string_slice_from_cstr(getenv("TERM"));
+    if (!oz_string_slice_is_empty(term) &&
+        oz_strings_equal(term, oz_string_slice_from_cstr("dumb"))) {
         oz_global_term_cfg.color_enabled = false;
         return;
     }
