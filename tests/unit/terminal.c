@@ -49,7 +49,7 @@ MU_TEST(terminal_env_no_color_preference) {
 
 // Suite
 MU_TEST_SUITE(terminal_env_suite) { // NOLINT
-    // MU_RUN_TEST(terminal_init_no_env);
+    MU_RUN_TEST(terminal_init_no_env);
     MU_RUN_TEST(terminal_env_no_color);
     MU_RUN_TEST(terminal_env_force_color);
     MU_RUN_TEST(terminal_env_term_dumb);

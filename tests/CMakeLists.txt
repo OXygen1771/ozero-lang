@@ -6,6 +6,12 @@ macro(ozero_add_unit_test test_filename)
         "${CMAKE_BINARY_DIR}/include"
         "${CMAKE_SOURCE_DIR}/thirdparty"
     )
+
+    # minunit.h uses clock_gettime, which is POSIX.
+    if(NOT WIN32)
+        target_compile_definitions(test_${test_filename} PRIVATE _XOPEN_SOURCE=700)
+    endif()
+
     add_test(NAME test_${test_filename} COMMAND test_${test_filename})
 endmacro()
 
