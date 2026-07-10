@@ -4,7 +4,7 @@
 
 // Error codes for internal errors.
 // User-facing errors will use common/diagnostics later
-typedef enum {
+typedef enum OzeroErrorCode {
     OZ_OK = 0,
 
     // I/O errors
@@ -24,7 +24,7 @@ typedef enum {
 } OzeroErrorCode;
 
 // Tagged union for detailed error information.
-typedef struct {
+typedef struct OzeroError {
     OzeroErrorCode code;
 
     union {

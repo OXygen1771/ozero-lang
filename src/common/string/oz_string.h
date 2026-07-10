@@ -7,7 +7,7 @@
 /*
  * A UTF-8 string owning its memory. May or may not be null-terminated.
  */
-typedef struct {
+typedef struct OzeroString {
     // Length in bytes (not in characters!).
     // WARNING: Does NOT include the null-terminator.
     size_t length;
@@ -18,7 +18,7 @@ typedef struct {
 /*
  * A UTF-8 string slice, does not own its memory.
  */
-typedef struct {
+typedef struct OzeroStringSlice {
     // Length in bytes (not in characters!).
     size_t length;
     // Underlying character memory. Should not be used directly.
