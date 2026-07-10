@@ -36,6 +36,7 @@ configure_file(
 # src/
 add_subdirectory(src/common)
 add_subdirectory(src/cli)
+add_subdirectory(src/platform)
 
 option(OZERO_BUILD_TESTS "Build tests for ${PROJECT_NAME}" ON)
 if (OZERO_BUILD_TESTS)

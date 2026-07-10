@@ -8,6 +8,10 @@ if(NOT WIN32)
 endif()
 
 # modules
+set(COMMON_ERROR_SOURCES
+    error/error.c
+)
+
 set(COMMON_LOG_SOURCES
     log/logger.c
 )
@@ -21,6 +25,7 @@ set(COMMON_TERMINAL_SOURCES
 )
 
 set(COMMON_SOURCES
+    ${COMMON_ERROR_SOURCES}
     ${COMMON_LOG_SOURCES}
     ${COMMON_STRING_SOURCES}
     ${COMMON_STYLER_SOURCES}
@@ -33,5 +38,10 @@ target_include_directories(ozero_common
         "${CMAKE_SOURCE_DIR}/include"
         # leave private
         "${CMAKE_BINARY_DIR}/include"
+        "${CMAKE_SOURCE_DIR}/src/" # platform etc.
         "${CMAKE_SOURCE_DIR}/src/common"
+)
+target_link_libraries(ozero_common
+    PUBLIC
+        ozero_platform
 )
