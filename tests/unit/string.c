@@ -153,8 +153,8 @@ MU_TEST_SUITE(string_slice_suite) {
 
 int main() {
     MU_RUN_SUITE(string_suite);
-    MU_REPORT();
     MU_RUN_SUITE(string_slice_suite);
+
     MU_REPORT();
     return MU_EXIT_CODE;
 }

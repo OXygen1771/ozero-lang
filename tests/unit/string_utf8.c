@@ -281,8 +281,8 @@ MU_TEST_SUITE(kuhn_suite) {
 
 int main() {
     MU_RUN_SUITE(utf8_valid);
-    MU_REPORT();
     MU_RUN_SUITE(utf8_invalid);
+
     MU_REPORT();
     return MU_EXIT_CODE;
 }
