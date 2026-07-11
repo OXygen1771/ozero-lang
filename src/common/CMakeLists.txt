@@ -11,9 +11,12 @@ endif()
 set(COMMON_ERROR_SOURCES
     error/error.c
 )
-
 set(COMMON_LOG_SOURCES
     log/logger.c
+)
+set(COMMON_MEMORY_SOURCES
+    memory/arena_allocator.c
+    memory/system_allocator.c
 )
 set(COMMON_STRING_SOURCES
     string/oz_string.c
@@ -27,6 +30,7 @@ set(COMMON_TERMINAL_SOURCES
 set(COMMON_SOURCES
     ${COMMON_ERROR_SOURCES}
     ${COMMON_LOG_SOURCES}
+    ${COMMON_MEMORY_SOURCES}
     ${COMMON_STRING_SOURCES}
     ${COMMON_STYLER_SOURCES}
     ${COMMON_TERMINAL_SOURCES}

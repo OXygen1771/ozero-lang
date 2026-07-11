@@ -15,6 +15,11 @@ macro(ozero_add_unit_test test_filename)
     add_test(NAME test_${test_filename} COMMAND test_${test_filename})
 endmacro()
 
+# common
 ozero_add_unit_test(terminal)
+
 ozero_add_unit_test(string)
 ozero_add_unit_test(string_utf8)
+
+ozero_add_unit_test(alloc_system)
+ozero_add_unit_test(alloc_arena)
