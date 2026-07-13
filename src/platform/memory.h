@@ -30,6 +30,13 @@ void oz_platform_mem_aligned_free(void *ptr, size_t size);
 // WARNING: Performs NO checks.
 void *oz_platform_mem_realloc(void *ptr, size_t old_size, size_t new_size);
 
+// Re-allocate aligned memory by pointer to a block and size. `align` MUST match
+// the original alignment.
+// NOTE: added this, because on Windows HeapReAlloc() can't reallocate memory
+// allocated by _aligned_malloc().
+// WARNING: Performs NO checks.
+void *oz_platform_mem_aligned_realloc(void *ptr, size_t new_size, size_t align);
+
 // Get platform page size in bytes. Should be used for mmap().
 // WARNING: Performs NO checks.
 size_t oz_platform_mem_get_page_size(void);

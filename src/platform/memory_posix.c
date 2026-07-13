@@ -19,14 +19,19 @@ void oz_platform_mem_free(void *ptr, size_t size) {
 
 void oz_platform_mem_aligned_free(void *ptr, size_t size) {
     (void)size; // aligned_alloc() doesn't need this
-    if (ptr != nullptr) {
-        free(ptr);
-    }
+    free(ptr);
 }
 
 void *oz_platform_mem_realloc(void *ptr, size_t old_size, // NOLINT
                               size_t new_size) {
     (void)old_size; // POSIX realloc doesn't use this
+    return realloc(ptr, new_size);
+}
+
+void *oz_platform_mem_aligned_realloc(void *ptr, size_t new_size, // NOLINT
+                                      size_t align) {
+    // same as plain realloc
+    (void)align;
     return realloc(ptr, new_size);
 }
 

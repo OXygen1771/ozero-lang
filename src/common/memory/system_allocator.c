@@ -37,8 +37,8 @@ static void system_free(void *ctx, void *ptr, size_t size, // NOLINT
 }
 
 static OzeroAllocationResult system_realloc(void *ctx, void *ptr, // NOLINT
-                                            size_t old_size, size_t new_size,
-                                            size_t align) {
+                                            size_t old_size,      // NOLINT
+                                            size_t new_size, size_t align) {
     (void)ctx;
     if (new_size == 0) {
         oz_platform_mem_aligned_free(ptr, old_size);
@@ -46,7 +46,7 @@ static OzeroAllocationResult system_realloc(void *ctx, void *ptr, // NOLINT
                                        .error = {.code = OZ_OK}};
     }
 
-    void *new_ptr = oz_platform_mem_realloc(ptr, old_size, new_size);
+    void *new_ptr = oz_platform_mem_aligned_realloc(ptr, new_size, align);
     if (new_ptr == nullptr) {
         return (OzeroAllocationResult){
             .ptr = nullptr,

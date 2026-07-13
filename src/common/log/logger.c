@@ -26,17 +26,23 @@ static const char *log_level_names[] = {
 
 static const size_t time_buf_size = 32; // arbitrary number
 
-void oz__log_message(const char *filename, u32 line, OzeroLogLevel level,
-                     const char *fmt, ...) {
+void oz__log_message(const char *filename, u32 line, // NOLINT
+                     OzeroLogLevel level, const char *fmt, ...) {
     // time formatting
-    time_t timer;
-    struct tm tm_info;
+    time_t timer = time(nullptr);
+    struct tm tm_info = {0};
     char time_buffer[time_buf_size];
     timer = time(&timer);
-    localtime_r(&timer, &tm_info);
-    // leave it simple for now
-    strftime(time_buffer, time_buf_size, "%H:%M:%S", &tm_info);
 
+#ifdef _WIN32
+    if (localtime_s(&tm_info, &timer) == 0) {
+        strftime(time_buffer, time_buf_size, "%H:%M:%S", &tm_info);
+    }
+#else
+    if (localtime_r(&timer, &tm_info) != nullptr) {
+        strftime(time_buffer, time_buf_size, "%H:%M:%S", &tm_info);
+    }
+#endif
     // form full log line
     char prefix[time_buf_size * 2]; // time + log level
     snprintf(prefix, sizeof(prefix), "%s - [%s]", time_buffer,

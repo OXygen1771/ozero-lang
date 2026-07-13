@@ -1,13 +1,30 @@
 #include "terminal/terminal.h"
+#include "defines.h"
 
 #include "minunit.h"
 
 #include <stdlib.h>
 
+// windows doesn't like unsetenv, setenv, getenv
+#ifdef _WIN32
+#define _CRT_SECURE_NO_WARNINGS
+static i32 test__setenv(const char *name, const char *value) {
+    return _putenv_s(name, value);
+}
+
+static i32 test__unsetenv(const char *name) { return _putenv_s(name, ""); }
+#else
+static i32 test__setenv(const char *name, const char *value) {
+    return setenv(name, value, 1);
+}
+
+static i32 test__unsetenv(const char *name) { return unsetenv(name); }
+#endif
+
 MU_TEST(terminal_init_no_env) {
-    unsetenv("NO_COLOR");
-    unsetenv("FORCE_COLOR");
-    unsetenv("TERM");
+    test__unsetenv("NO_COLOR");
+    test__unsetenv("FORCE_COLOR");
+    test__unsetenv("TERM");
 
     // nothing to assert, so just assert it doesn't crash
     oz_term_init();
@@ -15,36 +32,36 @@ MU_TEST(terminal_init_no_env) {
 }
 
 MU_TEST(terminal_env_no_color) {
-    setenv("NO_COLOR", "1", 1);
-    unsetenv("FORCE_COLOR");
+    test__setenv("NO_COLOR", "1");
+    test__unsetenv("FORCE_COLOR");
     oz_term_init();
     mu_assert_int_eq(oz_global_term_cfg.color_enabled, false);
-    unsetenv("NO_COLOR");
+    test__unsetenv("NO_COLOR");
 }
 
 MU_TEST(terminal_env_force_color) {
-    setenv("FORCE_COLOR", "1", 1);
-    unsetenv("NO_COLOR");
+    test__setenv("FORCE_COLOR", "1");
+    test__unsetenv("NO_COLOR");
     oz_term_init();
     mu_assert_int_eq(oz_global_term_cfg.color_enabled, true);
-    unsetenv("FORCE_COLOR");
+    test__unsetenv("FORCE_COLOR");
 }
 
 MU_TEST(terminal_env_term_dumb) {
-    setenv("TERM", "dumb", 1);
-    unsetenv("NO_COLOR");
-    unsetenv("FORCE_COLOR");
+    test__setenv("TERM", "dumb");
+    test__unsetenv("NO_COLOR");
+    test__unsetenv("FORCE_COLOR");
     oz_term_init();
     mu_assert_int_eq(oz_global_term_cfg.color_enabled, 0);
-    unsetenv("TERM");
+    test__unsetenv("TERM");
 }
 
 MU_TEST(terminal_env_no_color_preference) {
-    setenv("NO_COLOR", "1", 1);
-    setenv("FORCE_COLOR", "1", 1);
+    test__setenv("NO_COLOR", "1");
+    test__setenv("FORCE_COLOR", "1");
     oz_term_init();
     mu_assert_int_eq(oz_global_term_cfg.color_enabled, 0);
-    unsetenv("TERM");
+    test__unsetenv("TERM");
 }
 
 // Suite
