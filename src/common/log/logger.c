@@ -14,8 +14,8 @@ static OzeroTextStyle log_level_name_styles[] = {
     [OZ_LOG_LEVEL_DEBUG] = OZ_STYLE_CYAN,
     [OZ_LOG_LEVEL_INFO] = OZ_STYLE_BRIGHT_WHITE,
     [OZ_LOG_LEVEL_WARN] = OZ_STYLE_YELLOW,
-    [OZ_LOG_LEVEL_ERROR] = OZ_STYLE_RED,
-    [OZ_LOG_LEVEL_FATAL] = OZ_STYLE_BRIGHT_RED,
+    [OZ_LOG_LEVEL_ERROR] = OZ_STYLE_BOLD_RED,
+    [OZ_LOG_LEVEL_FATAL] = OZ_STYLE_BOLD_BRIGHT_RED,
 };
 
 static const char *log_level_names[] = {
