@@ -25,6 +25,9 @@ typedef enum OzeroErrorCode {
     OZ_ERR_UNSUPPORTED_ALLOCATION_OPERATION, //!< Operation is not supported for
                                              //!< this allocator.
 
+    // Argument errors
+    OZ_ERR_INVALID_CMD_ARGUMENT, //!< Invalid command argument.
+
     // Other
     OZ_ERR_UNKNOWN, //!< Generic error.
 } OzeroErrorCode;

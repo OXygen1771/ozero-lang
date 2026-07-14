@@ -33,6 +33,10 @@ const char *oz_error_get_associated_message(const OzeroErrorCode code) {
     case OZ_ERR_UNSUPPORTED_ALLOCATION_OPERATION:
         return "unsupported allocation operation";
 
+    // Argument errors
+    case OZ_ERR_INVALID_CMD_ARGUMENT:
+        return "invalid argument";
+
     // Other
     case OZ_ERR_UNKNOWN:
     default:
@@ -105,6 +109,7 @@ size_t oz_error_format_message(const OzeroError *err, char *buf,
             oz__alloc_operation_name(
                 err->payload.unsupported_alloc_op.operation));
 
+    case OZ_ERR_INVALID_CMD_ARGUMENT:
     case OZ_ERR_UNKNOWN: {
         const char *msg = err->payload.generic.message;
         if (msg) {

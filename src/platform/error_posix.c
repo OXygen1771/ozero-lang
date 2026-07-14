@@ -33,6 +33,8 @@ OzeroErrorCode oz_platform_err_to_code(i32 platform_error) {
 #endif
     case ENOSPC:
         return OZ_ERR_NO_SPACE;
+    case EINVAL:
+        return OZ_ERR_INVALID_CMD_ARGUMENT;
     case ENOMEM:
         return OZ_ERR_OOM;
     default:

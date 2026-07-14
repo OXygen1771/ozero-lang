@@ -43,3 +43,22 @@ if (OZERO_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+
+# the entrypoint
+add_executable(ozero)
+target_sources(ozero PRIVATE src/main.c)
+target_include_directories(ozero
+    PRIVATE
+        "${CMAKE_SOURCE_DIR}/include"
+        # leave private
+        "${CMAKE_BINARY_DIR}/include"
+        "${CMAKE_SOURCE_DIR}/src/" # platform etc.
+        "${CMAKE_SOURCE_DIR}/src/common"
+)
+target_link_libraries(ozero
+    PRIVATE
+        ozero_cli
+        ozero_common
+)
+install(TARGETS ozero DESTINATION bin)

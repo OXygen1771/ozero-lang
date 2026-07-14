@@ -1,8 +1,9 @@
 macro(ozero_add_unit_test test_filename)
     add_executable(test_${test_filename} unit/${test_filename}.c)
-    target_link_libraries(test_${test_filename} PRIVATE ozero_common)
+    target_link_libraries(test_${test_filename} PRIVATE ozero_common ozero_cli)
     target_include_directories(test_${test_filename} PRIVATE
         "${CMAKE_SOURCE_DIR}/src/common"
+        "${CMAKE_SOURCE_DIR}/src/"
         "${CMAKE_BINARY_DIR}/include"
         "${CMAKE_SOURCE_DIR}/thirdparty"
     )
@@ -23,3 +24,6 @@ ozero_add_unit_test(string_utf8)
 
 ozero_add_unit_test(alloc_system)
 ozero_add_unit_test(alloc_arena)
+
+# cli
+ozero_add_unit_test(cli_parser)

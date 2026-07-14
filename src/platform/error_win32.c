@@ -51,6 +51,8 @@ OzeroErrorCode oz_platform_err_to_code(int platform_error) {
         return OZ_ERR_NO_SPACE;
     case ERROR_DIRECTORY:
         return OZ_ERR_IS_DIRECTORY;
+    case ERROR_INVALID_PARAMETER:
+        return OZ_ERR_INVALID_CMD_ARGUMENT;
     default:
         return OZ_ERR_IO;
     }
