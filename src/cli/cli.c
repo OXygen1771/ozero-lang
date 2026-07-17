@@ -42,7 +42,6 @@ i32 ozero_cli_run(i32 argc, char **argv) {
     if (parsed.command == nullptr) {
         // TODO: print general help
         OZ_CLI_ERROR("no command specified");
-        OZ_CLI_SUCCESS("OZero interpreter, version %s", OZERO_VERSION);
 
         oz_alloc_arena_reset(&arena);
         return EXIT_CLI_ERROR;

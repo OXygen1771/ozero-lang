@@ -8,7 +8,7 @@
 static const char *EMIT_STAGES[] = {"tokens", "ast"};
 static const size_t EMIT_STAGES_COUNT = 2;
 
-static const OzeroCLIOption GLOBAL_OPTIONS[] = {
+const OzeroCLIOption OZERO_CLI_GLOBAL_OPTIONS[] = {
     {
         .long_name = "version",
         .short_name = '\0',
@@ -73,14 +73,16 @@ static const OzeroCLIOption GLOBAL_OPTIONS[] = {
     },
 };
 
+const size_t OZERO_CLI_GLOBAL_OPTION_COUNT =
+    sizeof(OZERO_CLI_GLOBAL_OPTIONS) / sizeof(OZERO_CLI_GLOBAL_OPTIONS[0]);
+
 // run
 static const OzeroCLIOption RUN_OPTIONS[] = {
     {
         .long_name = nullptr,
         .short_name = '\0',
         .type = OZ_CLI_OPT_POSITIONAL,
-        .target_offset = offsetof(OzeroCLICommandArgs, run.files),
-        .array_count_offset = offsetof(OzeroCLICommandArgs, run.file_count),
+        .scope = OZ_CLI_SCOPE_COMMAND,
         .help = "Source file(s) to run",
         .value_name = "FILE(s)",
         .required = true,
@@ -94,8 +96,6 @@ static const OzeroCLIOption CHECK_OPTIONS[] = {
         .short_name = '\0',
         .type = OZ_CLI_OPT_POSITIONAL,
         .scope = OZ_CLI_SCOPE_COMMAND,
-        .target_offset = offsetof(OzeroCLICommandArgs, check.files),
-        .array_count_offset = offsetof(OzeroCLICommandArgs, check.file_count),
         .help = "Source file(s) to check",
         .value_name = "FILE(s)",
         .required = true,
@@ -109,8 +109,6 @@ static const OzeroCLIOption FMT_OPTIONS[] = {
         .short_name = '\0',
         .type = OZ_CLI_OPT_POSITIONAL,
         .scope = OZ_CLI_SCOPE_COMMAND,
-        .target_offset = offsetof(OzeroCLICommandArgs, fmt.files),
-        .array_count_offset = offsetof(OzeroCLICommandArgs, fmt.file_count),
         .help = "Source file(s) to format",
         .value_name = "FILE(s)",
         .required = true,
@@ -120,7 +118,7 @@ static const OzeroCLIOption FMT_OPTIONS[] = {
         .short_name = 'i',
         .type = OZ_CLI_OPT_FLAG,
         .scope = OZ_CLI_SCOPE_COMMAND,
-        .target_offset = offsetof(OzeroCLICommandArgs, fmt.in_place),
+        .target_offset = offsetof(OzeroCLICommandOptions, fmt.in_place),
         .help = "Edit file in place instead of printing to stdout",
         .value_name = nullptr,
         .required = false,
@@ -134,8 +132,6 @@ static const OzeroCLIOption CREATE_OPTIONS[] = {
         .short_name = '\0',
         .type = OZ_CLI_OPT_POSITIONAL,
         .scope = OZ_CLI_SCOPE_COMMAND,
-        .target_offset =
-            offsetof(OzeroCLICommandArgs, create_project.project_name),
         .help = "Name of the project to create",
         .value_name = "NAME",
         .required = true,
@@ -150,7 +146,6 @@ static const OzeroCLIOption HELP_OPTIONS[] = {
         .type = OZ_CLI_OPT_POSITIONAL,
         .help = "Command to show help for (omit for general help)",
         .scope = OZ_CLI_SCOPE_COMMAND,
-        .target_offset = offsetof(OzeroCLICommandArgs, help.command_name),
         .value_name = "COMMAND",
         .required = false,
     },

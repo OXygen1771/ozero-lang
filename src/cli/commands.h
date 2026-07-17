@@ -4,9 +4,13 @@
 
 // All registered CLI commands.
 extern const OzeroCLICommand OZERO_CLI_COMMANDS[];
-
 // Number of registered commands.
 extern const size_t OZERO_CLI_COMMAND_COUNT;
+
+// All registered global CLI options.
+extern const OzeroCLIOption OZERO_CLI_GLOBAL_OPTIONS[];
+// Number of registered global options.
+extern const size_t OZERO_CLI_GLOBAL_OPTION_COUNT;
 
 // Find a command by name. Returns nullptr if not found.
 const OzeroCLICommand *ozero_cli_find_command(const char *name);

@@ -27,7 +27,8 @@ typedef struct OzeroCLIOption {
 
     OzeroCLIOptionType type;
     OzeroCLIOptionScope scope;
-    size_t target_offset; // Offset to parsed result.
+    size_t target_offset; // Offset to parsed result of FLAG, COUNT, STRING, INT
+                          // options.
 
     const char *help;       // Description for the `help` command.
     const char *value_name; // "PATH" for --output [PATH], etc.
@@ -37,9 +38,6 @@ typedef struct OzeroCLIOption {
                                  // nullptr, everything is allowed, as long as
                                  // it's of the correct type.
     size_t allowed_values_count;
-
-    // only for POSITIONAL option arrays
-    size_t array_count_offset; // offsetof(..., count)
 } OzeroCLIOption;
 
 // forward decl
@@ -68,35 +66,40 @@ typedef struct OzeroCLIGlobalOptions {
     const char *emit_output; // --emit-output <file>
 } OzeroCLIGlobalOptions;
 
-// Command-specific arguments.
-typedef union OzeroCLICommandArgs {
+// Command-specific options. Does not contain information about positional
+// arguments.
+typedef union OzeroCLICommandOptions {
     struct {
-        const char **files;
-        size_t file_count;
+        u8 _no_opts_yet;
     } run;
 
     struct {
-        const char **files;
-        size_t file_count;
+        u8 _no_opts_yet;
     } check;
 
     struct {
-        const char **files;
-        size_t file_count;
         bool in_place;
     } fmt;
 
     struct {
-        const char *project_name;
+        u8 _no_opts_yet;
     } create_project;
 
     struct {
-        const char *command_name; // nullptr for general help
+        u8 _no_opts_yet;
     } help;
 
     struct {
+        u8 _no_opts_yet;
     } repl; // has no specific options (yet?)
-} OzeroCLICommandArgs;
+} OzeroCLICommandOptions;
+
+// The range of command-specific arguments in argv.
+typedef struct OzeroArgRange {
+    // i32 because argc is i32
+    i32 start;
+    i32 count;
+} OzeroArgRange;
 
 // The result of parsing CLI arguments.
 typedef struct OzeroCLIParsedArgs {
@@ -104,11 +107,17 @@ typedef struct OzeroCLIParsedArgs {
 
     const OzeroCLICommand
         *command; // Pointer to matched command (or nullptr, if no match).
-    OzeroCLICommandArgs command_args;
+    OzeroCLICommandOptions command_opts;
+
+    // for handler context
+    i32 argc;
+    char **argv;
+
+    // Positional arguments for the current command.
+    OzeroArgRange positional_args;
 
     // Arguments after -- (passed to script)
-    const char **script_args;
-    size_t script_args_count;
+    OzeroArgRange script_args;
 } OzeroCLIParsedArgs;
 
 // Parse argc/argv into structured arguments.
